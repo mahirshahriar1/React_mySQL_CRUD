@@ -1,13 +1,36 @@
 import './App.css';
 import React, { useState } from 'react';
+import Axios from 'axios'
 
 function App() {
 
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
-  const [position, setPosition] = useState("");
   const [country, setCountry] = useState("");
+  const [position, setPosition] = useState("");
   const [wage, setWage] = useState(0);
+  const [employeelist, setEmployeeList] = useState([ ]);
+
+
+  const addEmployee = () => {
+   
+    Axios.post('http://localhost:3001/create',{
+        name: name, 
+        age: age, 
+        country: country, 
+        position: position,
+        wage: wage
+      }).then(()=>{
+        console.log("Success");
+      });
+  }
+
+  const getEmployees = () => {
+    Axios.get('http://localhost:3001/employees').then((response)=>{
+        //console.log(response.data);
+        setEmployeeList(response.data);
+      });
+  };
 
 
   return (
@@ -20,7 +43,7 @@ function App() {
         }} />
 
         <label>Age</label>
-        <input type="text" onChange={(event) => {
+        <input type="number" onChange={(event) => {
           setAge(event.target.value);
         }} />
 
@@ -35,13 +58,29 @@ function App() {
         }} />
 
         <label>Wage</label>
-        <input type="text" onChange={(event) => {
+        <input type="number" onChange={(event) => {
           setWage(event.target.value);
         }} />
-        <button>Add Employee</button>
+        <button onClick={addEmployee}>Add Employee</button>
       </div>
 
+
+      <div className='employees'> 
+       <button onClick={getEmployees}>Show Employees</button>
+       {employeelist.map((val)=>{
+          return <div className='employee' key={val.id}>
+              <h3>Name: {val.name}</h3>
+              <h3>Age: {val.age}</h3>
+              <h3>Country: {val.country}</h3>
+              <h3>Position: {val.position}</h3>
+              <h3>Wage: {val.wage}</h3>
+            </div>
+       })}
+       
+
+      </div>
     </div>
+    
   );
 }
 
