@@ -33,7 +33,8 @@ function App() {
       //     wage: wage
       //   },
       // ]); //This wont work bcz Id is not unique
-      getEmployees(); // so i call getEmployees() to get all the employees
+     // if(employeelist.length !== 0)
+        getEmployees(); // so i call getEmployees() to get all the employees
     });
   }
 
