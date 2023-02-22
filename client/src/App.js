@@ -14,7 +14,7 @@ function App() {
 
   const [newWage, setNewWage] = useState(0);
 
-  
+
   const addEmployee = () => {
 
     Axios.post('http://localhost:3001/create', {
@@ -24,7 +24,16 @@ function App() {
       position: position,
       wage: wage
     }).then(() => {
-     
+      console.log("success");
+      // setEmployeeList([...employeelist,{
+      //     name: name,
+      //     age: age,   
+      //     country: country,
+      //     position: position,
+      //     wage: wage
+      //   },
+      // ]); //This wont work bcz Id is not unique
+      getEmployees(); // so i call getEmployees() to get all the employees
     });
   }
 
