@@ -51,7 +51,7 @@ function App() {
       setEmployeeList(employeelist.filter((val) => {
         return val.id !== id;
       }));
-      altert("Employee Deleted");
+      alert("Employee Deleted");
     });
   };
 
